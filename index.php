@@ -44,6 +44,9 @@ cabecalho('Meu caminho');
 <?php if (isset($_GET['excluida'])): ?>
     <div class="notice">Objetivo removido.</div>
 <?php endif; ?>
+<?php if (isset($_GET['editada'])): ?>
+    <div class="notice">Objetivo atualizado com sucesso.</div>
+<?php endif; ?>
 
 <section class="stats-grid">
     <article class="stat-card coral"><span class="stat-icon">○</span><small>OBJETIVOS TOTAIS</small><strong><?= $total ?></strong></article>
@@ -76,7 +79,13 @@ cabecalho('Meu caminho');
                         </form>
                         <div class="goal-copy"><strong><?= e($tarefa->titulo) ?></strong><?php if ($tarefa->descricao): ?><span><?= e(mb_strimwidth($tarefa->descricao, 0, 92, '…')) ?></span><?php endif; ?></div>
                         <div class="goal-meta"><span class="category"><?= e($tarefa->categoria) ?></span><span><?= $tarefa->prazo ? e(date('d/m/Y', strtotime((string) $tarefa->prazo))) : 'Sem prazo' ?></span></div>
-                        <a class="remove" href="exclusao.php?id=<?= (int) $tarefa->id ?>">×</a>
+                        <div class="goal-actions">
+                            <a class="edit-action" href="editar.php?id=<?= (int) $tarefa->id ?>" title="Editar objetivo" aria-label="Editar objetivo">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg>
+                                <span>Editar</span>
+                            </a>
+                            <a class="remove" href="exclusao.php?id=<?= (int) $tarefa->id ?>" title="Excluir objetivo" aria-label="Excluir objetivo">×</a>
+                        </div>
                     </article>
                 <?php endforeach; ?>
             </div>
